@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>NEXUSSNIPS - 3D Cinematic Reels</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "surface": "#131314",
+            "primary-fixed": "#ffddb0",
+            "on-secondary-fixed-variant": "#6200bc",
+            "outline": "#9c8f7f",
+            "on-primary-container": "#654300",
+            "secondary-fixed": "#eddcff",
+            "error-container": "#93000a",
+            "inverse-on-surface": "#313031",
+            "on-tertiary-fixed": "#1a1c1c",
+            "surface-tint": "#f4bd6a",
+            "primary": "#ffcd82",
+            "secondary-fixed-dim": "#d8b9ff",
+            "secondary": "#d8b9ff",
+            "inverse-primary": "#7f5608",
+            "on-tertiary-fixed-variant": "#454747",
+            "surface-dim": "#131314",
+            "on-primary-fixed": "#281800",
+            "secondary-container": "#6e06d0",
+            "tertiary-fixed-dim": "#c6c6c7",
+            "on-error": "#690005",
+            "tertiary": "#d4d5d5",
+            "on-primary-fixed-variant": "#614000",
+            "outline-variant": "#4f4538",
+            "on-surface-variant": "#d3c4b2",
+            "primary-fixed-dim": "#f4bd6a",
+            "tertiary-fixed": "#e2e2e2",
+            "on-primary": "#442c00",
+            "surface-container-high": "#2a2a2b",
+            "on-background": "#e5e2e3",
+            "on-secondary-fixed": "#290055",
+            "on-tertiary": "#2f3131",
+            "surface-bright": "#3a393a",
+            "on-tertiary-container": "#484a4a",
+            "surface-container-highest": "#353436",
+            "error": "#ffb4ab",
+            "inverse-surface": "#e5e2e3",
+            "background": "#131314",
+            "primary-container": "#e5b05e",
+            "surface-variant": "#353436",
+            "on-error-container": "#ffdad6",
+            "on-secondary-container": "#d5b5ff",
+            "on-surface": "#e5e2e3",
+            "surface-container": "#201f20",
+            "surface-container-low": "#1c1b1c",
+            "tertiary-container": "#b8b9b9",
+            "surface-container-lowest": "#0e0e0f",
+            "on-secondary": "#450086"
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "lg": "0.5rem",
+            "xl": "1rem",
+            "2xl": "1.5rem",
+            "full": "9999px"
+          },
+          spacing: {
+            "section-gap": "100px",
+            "gutter": "28px",
+            "stack-md": "16px",
+            "stack-sm": "8px",
+            "margin-desktop": "80px",
+            "margin-mobile": "20px",
+            "container-max": "1440px",
+            "stack-lg": "32px"
+          },
+          fontFamily: {
+            "display-lg": ["Bodoni Moda", "serif"],
+            "headline-xl": ["Bodoni Moda", "serif"],
+            "headline-lg": ["Bodoni Moda", "serif"],
+            "headline-md": ["Bodoni Moda", "serif"],
+            "body-lg": ["Hanken Grotesk", "sans-serif"],
+            "body-md": ["Hanken Grotesk", "sans-serif"],
+            "label-md": ["Hanken Grotesk", "sans-serif"],
+            "label-sm": ["Hanken Grotesk", "sans-serif"]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+    :root {
+      --primary-glow: rgba(255, 205, 130, 0.28);
+      --secondary-glow: rgba(216, 185, 255, 0.2);
+    }
+    
+    body {
+      background-color: #131314;
+      color: #e5e2e3;
+      overflow-x: hidden;
+      perspective: 1400px;
+    }
+
+    /* Ambient dynamic background lighting */
+    .ambient-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(255, 205, 130, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 80% 80%, rgba(110, 6, 208, 0.08) 0%, transparent 45%),
+        radial-gradient(circle at 50% 50%, rgba(20, 20, 22, 0.9) 0%, #131314 100%);
+    }
+
+    /* Subtle 3D Floating animation keyframes */
+    @keyframes float-slow-1 {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-14px) rotate(0.8deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+    @keyframes float-slow-2 {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(-1deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+    @keyframes float-slow-3 {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(0.5deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+    @keyframes float-slow-4 {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-18px) rotate(-0.7deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
+
+    .float-card-1 { animation: float-slow-1 6.2s ease-in-out infinite; }
+    .float-card-2 { animation: float-slow-2 7.1s ease-in-out infinite 0.5s; }
+    .float-card-3 { animation: float-slow-3 5.8s ease-in-out infinite 1.2s; }
+    .float-card-4 { animation: float-slow-4 6.7s ease-in-out infinite 0.8s; }
+
+    /* When hovering card, pause floating animation for butter-smooth 3D tilt tracking */
+    .card-3d-wrapper:hover .float-container {
+      animation-play-state: paused;
+    }
+
+    /* 3D Scene Card Setup */
+    .card-3d-wrapper {
+      perspective: 1000px;
+      transform-style: preserve-3d;
+    }
+
+    .card-3d-inner {
+      transform-style: preserve-3d;
+      transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.35s ease;
+      will-change: transform, box-shadow;
+      border-radius: 1.25rem;
+      position: relative;
+    }
+
+    .card-3d-inner:hover {
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.7),
+        0 0 35px -5px var(--primary-glow);
+    }
+
+    /* 3D Deep Layers */
+    .layer-base {
+      transform: translateZ(0px);
+    }
+    .layer-overlay {
+      transform: translateZ(20px);
+      transition: transform 0.3s ease;
+    }
+    .layer-content {
+      transform: translateZ(35px);
+      transition: transform 0.3s ease;
+    }
+    .layer-pop {
+      transform: translateZ(55px);
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Dynamic Sheen / Specular Light Reflection */
+    .sheen {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.22) 0%, transparent 60%);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      mix-blend-mode: overlay;
+      z-index: 20;
+    }
+    .card-3d-wrapper:hover .sheen {
+      opacity: 1;
+    }
+
+    /* Glass Effect */
+    .glass-panel {
+      background: rgba(22, 22, 24, 0.65);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-pill {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    /* 3D Flow Stream Carousel */
+    .flow-carousel-container {
+      perspective: 1600px;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      height: 620px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      user-select: none;
+      touch-action: pan-y;
+    }
+    .flow-track {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .flow-item {
+      position: absolute;
+      width: 300px;
+      height: 533px; /* 9:16 aspect ratio */
+      border-radius: 1.25rem;
+      transform-style: preserve-3d;
+      transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1), opacity 0.5s ease, filter 0.5s ease;
+      cursor: grab;
+      will-change: transform, opacity;
+    }
+    .flow-item:active {
+      cursor: grabbing;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #131314;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #353436;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #ffcd82;
+    }
+
+    /* Audio wave animation */
+    .wave-bar {
+      animation: wave 1.2s ease-in-out infinite alternate;
+    }
+    .wave-bar:nth-child(2) { animation-delay: 0.2s; }
+    .wave-bar:nth-child(3) { animation-delay: 0.4s; }
+    .wave-bar:nth-child(4) { animation-delay: 0.6s; }
+
+    @keyframes wave {
+      0% { height: 4px; }
+      100% { height: 16px; }
+    }
+  </style>
+</head>
+
+<body class="antialiased min-h-screen flex flex-col pt-[90px] relative selection:bg-primary selection:text-black">
+  <!-- Ambient Space Background Glow -->
+  <div class="ambient-bg"></div>
+
+  <!-- Top Navigation Bar -->
+  <nav class="fixed top-0 w-full bg-surface/80 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-margin-mobile md:px-margin-desktop py-4 z-50 transition-all duration-300">
+    <a href="#" class="font-display-lg text-2xl md:text-3xl text-primary tracking-tighter hover:brightness-125 transition">
+      NEXUSSNIPS
+    </a>
+
+    <!-- Desktop Navigation Links -->
+    <div class="hidden md:flex gap-8 items-center font-body-md text-sm tracking-wider uppercase">
+      <a href="../reels_collection/index.html" class="text-primary border-b-2 border-primary pb-1 transition-all">REELS</a>
+      <a href="#categories" class="text-on-surface-variant hover:text-primary transition-colors">CATEGORIES</a>
+      <a href="../about_the_creator/about.html" class="text-on-surface-variant hover:text-primary transition-colors">ABOUT</a>
+      <a href="../connect_with_cvision/connect.html" class="text-on-surface-variant hover:text-primary transition-colors">CONNECT</a>
+    </div>
+
+    <div class="hidden md:flex items-center gap-4">
+      <a href="../connect_with_cvision/connect.html" class="bg-primary text-on-primary font-label-md text-xs tracking-wider uppercase px-6 py-2.5 rounded-full hover:brightness-110 hover:shadow-[0_0_20px_rgba(255,205,130,0.4)] transition-all duration-300 font-semibold">
+        CONTACT
+      </a>
+    </div>
+
+    <!-- Mobile Hamburger Button -->
+    <button id="mobileMenuButton" class="md:hidden text-primary p-2 focus:outline-none" aria-label="Toggle navigation">
+      <span class="material-symbols-outlined text-3xl">menu</span>
+    </button>
+  </nav>
+
+  <!-- Mobile Dropdown Menu -->
+  <div id="mobileMenu" class="hidden md:hidden fixed inset-x-0 top-[73px] bg-surface/95 backdrop-blur-2xl border-b border-white/10 p-6 flex-col gap-4 z-40 transition-all">
+    <a href="../reels_collection/index.html" class="text-primary font-medium text-lg">REELS</a>
+    <a href="#categories" class="text-on-surface-variant hover:text-primary text-lg">CATEGORIES</a>
+    <a href="../about_the_creator/about.html" class="text-on-surface-variant hover:text-primary text-lg">ABOUT</a>
+    <a href="../connect_with_cvision/connect.html" class="text-on-surface-variant hover:text-primary text-lg">CONNECT</a>
+    <div class="pt-4 border-t border-white/10">
+      <a href="../connect_with_cvision/connect.html" class="inline-block bg-primary text-on-primary text-center w-full py-3 rounded-full font-semibold">CONTACT</a>
+    </div>
+  </div>
+
+  <!-- Main Content Canvas -->
+  <main class="flex-grow w-full max-w-container-max mx-auto px-margin-mobile md:px-margin-desktop py-8 relative z-10">
+    
+    <!-- Hero / Header Section -->
+    <div class="mb-10 flex flex-col lg:flex-row justify-between items-start lg:items-end gap-6">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full glass-pill text-xs font-label-md text-primary mb-3">
+          <span class="w-2 h-2 rounded-full bg-primary animate-ping"></span>
+          <span>SPATIAL 3D EXPERIENCE</span>
+        </div>
+        <h1 class="font-display-lg text-4xl sm:text-5xl lg:text-6xl text-primary mb-3 tracking-tight">
+          Cinematic Flow Reels
+        </h1>
+        <p class="font-body-lg text-on-surface-variant max-w-2xl text-base sm:text-lg">
+          Dive into a flowing 3D realm of curated visual cuts, cinema frames, and trending masterpieces. Hover, tilt, and explore.
+        </p>
+      </div>
+
+      <!-- Controls: Category Filters & Mode Switcher -->
+      <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full lg:w-auto">
+        <!-- View Toggle (Stream vs Grid) -->
+        <div class="inline-flex p-1 rounded-full glass-panel border border-white/10 self-stretch sm:self-auto justify-center">
+          <button id="viewGridBtn" class="px-4 py-1.5 rounded-full text-xs font-label-md tracking-wider uppercase transition-all bg-primary text-on-primary font-bold shadow-md flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-base">grid_view</span>
+            Floating Grid
+          </button>
+          <button id="viewFlowBtn" class="px-4 py-1.5 rounded-full text-xs font-label-md tracking-wider uppercase transition-all text-on-surface-variant hover:text-white flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-base">view_carousel</span>
+            3D Flow Stream
+          </button>
+        </div>
+
+        <!-- Filter Tags -->
+        <div class="flex flex-wrap gap-2" id="categories">
+          <button data-filter="all" class="filter-btn active px-4 py-1.5 rounded-full border border-secondary text-secondary bg-secondary/15 font-label-md text-xs tracking-wider transition-all hover:brightness-125">
+            ALL
+          </button>
+          <button data-filter="movies" class="filter-btn px-4 py-1.5 rounded-full border border-white/10 text-on-surface-variant hover:border-secondary hover:text-secondary transition-all font-label-md text-xs tracking-wider">
+            MOVIES
+          </button>
+          <button data-filter="series" class="filter-btn px-4 py-1.5 rounded-full border border-white/10 text-on-surface-variant hover:border-secondary hover:text-secondary transition-all font-label-md text-xs tracking-wider">
+            WEB SERIES
+          </button>
+          <button data-filter="trending" class="filter-btn px-4 py-1.5 rounded-full border border-white/10 text-on-surface-variant hover:border-secondary hover:text-secondary transition-all font-label-md text-xs tracking-wider">
+            TRENDING
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 1: 3D FLOW STREAM (CAROUSEL SHOWCASE) -->
+    <div id="flowCarouselView" class="hidden my-8">
+      <div class="relative w-full">
+        <!-- Controls Arrow Left/Right -->
+        <button id="flowPrevBtn" class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full glass-panel border border-white/20 text-white flex items-center justify-center hover:bg-primary hover:text-black hover:scale-110 transition-all shadow-xl">
+          <span class="material-symbols-outlined">chevron_left</span>
+        </button>
+        <button id="flowNextBtn" class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 z-30 w-12 h-12 rounded-full glass-panel border border-white/20 text-white flex items-center justify-center hover:bg-primary hover:text-black hover:scale-110 transition-all shadow-xl">
+          <span class="material-symbols-outlined">chevron_right</span>
+        </button>
+
+        <!-- 3D Carousel Stage -->
+        <div class="flow-carousel-container" id="flowContainer">
+          <div class="flow-track" id="flowTrack"></div>
+        </div>
+
+        <div class="text-center mt-3 text-xs text-on-surface-variant font-label-md tracking-widest uppercase flex items-center justify-center gap-2">
+          <span class="material-symbols-outlined text-sm">swipe</span> Drag, scroll, or use keyboard arrow keys to explore in 3D
+        </div>
+      </div>
+    </div>
+
+    <!-- VIEW 2: 3D FLOATING REELS GRID -->
+    <div id="floatingGridView" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10 py-6">
+
+      <!-- Reel Card 1 -->
+      <div class="card-3d-wrapper" data-category="movies">
+        <div class="float-container float-card-1">
+          <a href="https://www.instagram.com/nexussnips/reel/Db0f0pHEoAS/" target="_blank" rel="noopener noreferrer" class="block card-3d-inner overflow-hidden border border-white/10 bg-surface-container-low shadow-2xl group">
+            <div class="sheen"></div>
+            <div class="relative aspect-[9/16] w-full overflow-hidden">
+              <img src="../reel1.jpg" alt="Reel 1" class="layer-base absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80';">
+              <div class="layer-overlay absolute inset-0 bg-gradient-to-t from-[#131314] via-[#131314]/30 to-black/30 pointer-events-none"></div>
+
+              <div class="layer-content absolute top-4 inset-x-4 flex justify-between items-center pointer-events-none">
+                <span class="glass-pill px-3 py-1 rounded-full text-[11px] font-semibold text-primary tracking-wider uppercase">MOVIES</span>
+                <span class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-white/90">
+                  <span class="material-symbols-outlined text-base">video_camera_front</span>
+                </span>
+              </div>
+
+              <div class="layer-pop absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                <div class="w-16 h-16 rounded-full bg-primary/90 text-black flex items-center justify-center shadow-[0_0_30px_rgba(255,205,130,0.8)] transform scale-75 group-hover:scale-100 transition-transform">
+                  <span class="material-symbols-outlined text-3xl fill-1">play_arrow</span>
+                </div>
+              </div>
+
+              <div class="layer-content absolute bottom-0 inset-x-0 p-5 pointer-events-none">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <div class="flex items-end gap-0.5 h-3">
+                    <span class="w-1 bg-primary wave-bar rounded-full"></span>
+                    <span class="w-1 bg-primary wave-bar rounded-full"></span>
+                    <span class="w-1 bg-primary wave-bar rounded-full"></span>
+                  </div>
+                  <span class="text-[11px] text-primary font-medium tracking-wide uppercase">Cinematic Sequence</span>
+                </div>
+                <h3 class="font-display-lg text-lg text-white font-medium line-clamp-1 group-hover:text-primary transition-colors">The Awakening Scene</h3>
+                <div class="flex justify-between items-center text-xs text-on-surface-variant mt-2">
+                  <span>@nexussnips</span>
+                  <span class="flex items-center gap-1 text-primary">Watch <span class="material-symbols-outlined text-xs">open_in_new</span></span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Reel Card 2 -->
+      <div class="card-3d-wrapper" data-category="trending">
+        <div class="float-container float-card-2">
+          <a href="https://www.instagram.com/nexussnips/reel/Dbie8_uElHD/" target="_blank" rel="noopener noreferrer" class="block card-3d-inner overflow-hidden border border-white/10 bg-surface-container-low shadow-2xl group">
+            <div class="sheen"></div>
+            <div class="relative aspect-[9/16] w-full overflow-hidden">
+              <img src="../reel2.jpg" alt="Reel 2" class="layer-base absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&auto=format&fit=crop&q=80';">
+              <div class="layer-overlay absolute inset-0 bg-gradient-to-t from-[#131314] via-[#131314]/30 to-black/30 pointer-events-none"></div>
+
+              <div class="layer-content absolute top-4 inset-x-4 flex justify-between items-center pointer-events-none">
+                <span class="glass-pill px-3 py-1 rounded-full text-[11px] font-semibold text-secondary tracking-wider uppercase">TRENDING</span>
+                <span class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-secondary">
+                  <span class="material-symbols-outlined text-base">local_fire_department</span>
+                </span>
+              </div>
+
+              <div class="layer-pop absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                <div class="w-16 h-16 rounded-full bg-secondary/90 text-black flex items-center justify-center shadow-[0_0_30px_rgba(216,185,255,0.8)] transform scale-75 group-hover:scale-100 transition-transform">
+                  <span class="material-symbols-outlined text-3xl fill-1">play_arrow</span>
+                </div>
+              </div>
+
+              <div class="layer-content absolute bottom-0 inset-x-0 p-5 pointer-events-none">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="text-[11px] text-secondary font-medium tracking-wide uppercase">Viral Cut</span>
+                </div>
+                <h3 class="font-display-lg text-lg text-white font-medium line-clamp-1 group-hover:text-secondary transition-colors">Midnight Velocity</h3>
+                <div class="flex justify-between items-center text-xs text-on-surface-variant mt-2">
+                  <span>@nexussnips</span>
+                  <span class="flex items-center gap-1 text-secondary">Watch <span class="material-symbols-outlined text-xs">open_in_new</span></span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Reel Card 3 -->
+      <div class="card-3d-wrapper" data-category="series">
+        <div class="float-container float-card-3">
+          <a href="https://www.instagram.com/nexussnips/reel/Da0MVNWS1sZ/" target="_blank" rel="noopener noreferrer" class="block card-3d-inner overflow-hidden border border-white/10 bg-surface-container-low shadow-2xl group">
+            <div class="sheen"></div>
+            <div class="relative aspect-[9/16] w-full overflow-hidden">
+              <img src="../reel3.jpg" alt="Reel 3" class="layer-base absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80';">
+              <div class="layer-overlay absolute inset-0 bg-gradient-to-t from-[#131314] via-[#131314]/30 to-black/30 pointer-events-none"></div>
+
+              <div class="layer-content absolute top-4 inset-x-4 flex justify-between items-center pointer-events-none">
+                <span class="glass-pill px-3 py-1 rounded-full text-[11px] font-semibold text-primary tracking-wider uppercase">WEB SERIES</span>
+                <span class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-white/90">
+                  <span class="material-symbols-outlined text-base">tv</span>
+                </span>
+              </div>
+
+              <div class="layer-pop absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                <div class="w-16 h-16 rounded-full bg-primary/90 text-black flex items-center justify-center shadow-[0_0_30px_rgba(255,205,130,0.8)] transform scale-75 group-hover:scale-100 transition-transform">
+                  <span class="material-symbols-outlined text-3xl fill-1">play_arrow</span>
+                </div>
+              </div>
+
+              <div class="layer-content absolute bottom-0 inset-x-0 p-5 pointer-events-none">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="text-[11px] text-primary font-medium tracking-wide uppercase">Series Premiere</span>
+                </div>
+                <h3 class="font-display-lg text-lg text-white font-medium line-clamp-1 group-hover:text-primary transition-colors">Shadows of Arcadia</h3>
+                <div class="flex justify-between items-center text-xs text-on-surface-variant mt-2">
+                  <span>@nexussnips</span>
+                  <span class="flex items-center gap-1 text-primary">Watch <span class="material-symbols-outlined text-xs">open_in_new</span></span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Reel Card 4 -->
+      <div class="card-3d-wrapper" data-category="movies">
+        <div class="float-container float-card-4">
+          <a href="https://www.instagram.com/nexussnips/reel/DUTcYY8kj6h/" target="_blank" rel="noopener noreferrer" class="block card-3d-inner overflow-hidden border border-white/10 bg-surface-container-low shadow-2xl group">
+            <div class="sheen"></div>
+            <div class="relative aspect-[9/16] w-full overflow-hidden">
+              <img src="../reel4.jpg" alt="Reel 4" class="layer-base absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&auto=format&fit=crop&q=80';">
+              <div class="layer-overlay absolute inset-0 bg-gradient-to-t from-[#131314] via-[#131314]/30 to-black/30 pointer-events-none"></div>
+
+              <div class="layer-content absolute top-4 inset-x-4 flex justify-between items-center pointer-events-none">
+                <span class="glass-pill px-3 py-1 rounded-full text-[11px] font-semibold text-primary tracking-wider uppercase">MOVIES</span>
+                <span class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-white/90">
+                  <span class="material-symbols-outlined text-base">movie</span>
+                </span>
+              </div>
+
+              <div class="layer-pop absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                <div class="w-16 h-16 rounded-full bg-primary/90 text-black flex items-center justify-center shadow-[0_0_30px_rgba(255,205,130,0.8)] transform scale-75 group-hover:scale-100 transition-transform">
+                  <span class="material-symbols-outlined text-3xl fill-1">play_arrow</span>
+                </div>
+              </div>
+
+              <div class="layer-content absolute bottom-0 inset-x-0 p-5 pointer-events-none">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="text-[11px] text-primary font-medium tracking-wide uppercase">Golden Hour</span>
+                </div>
+                <h3 class="font-display-lg text-lg text-white font-medium line-clamp-1 group-hover:text-primary transition-colors">Echoes in the Rain</h3>
+                <div class="flex justify-between items-center text-xs text-on-surface-variant mt-2">
+                  <span>@nexussnips</span>
+                  <span class="flex items-center gap-1 text-primary">Watch <span class="material-symbols-outlined text-xs">open_in_new</span></span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Reel Card 5 -->
+      <div class="card-3d-wrapper" data-category="trending">
+        <div class="float-container float-card-1">
+          <a href="https://www.instagram.com/nexussnips/reel/DbdUy2BEprH/" target="_blank" rel="noopener noreferrer" class="block card-3d-inner overflow-hidden border border-white/10 bg-surface-container-low shadow-2xl group">
+            <div class="sheen"></div>
+            <div class="relative aspect-[9/16] w-full overflow-hidden">
+              <img src="../reel5.jpg" alt="Reel 5" class="layer-base absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1509281373149-e957c6296406?w=800&auto=format&fit=crop&q=80';">
+              <div class="layer-overlay absolute inset-0 bg-gradient-to-t from-[#131314] via-[#131314]/30 to-black/30 pointer-events-none"></div>
+
+              <div class="layer-content absolute top-4 inset-x-4 flex justify-between items-center pointer-events-none">
+                <span class="glass-pill px-3 py-1 rounded-full text-[11px] font-semibold text-secondary tracking-wider uppercase">TRENDING</span>
+                <span class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-secondary">
+                  <span class="material-symbols-outlined text-base">trending_up</span>
+                </span>
+              </div>
+
+              <div class="layer-pop absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                <div class="w-16 h-16 rounded-full bg-secondary/90 text-black flex items-center justify-center shadow-[0_0_30px_rgba(216,185,255,0.8)] transform scale-75 group-hover:scale-100 transition-transform">
+                  <span class="material-symbols-outlined text-3xl fill-1">play_arrow</span>
+                </div>
+              </div>
+
+              <div class="layer-content absolute bottom-0 inset-x-0 p-5 pointer-events-none">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="text-[11px] text-secondary font-medium tracking-wide uppercase">High Octane</span>
+                </div>
+                <h3 class="font-display-lg text-lg text-white font-medium line-clamp-1 group-hover:text-secondary transition-colors">Cyberpunk Horizon</h3>
+                <div class="flex justify-between items-center text-xs text-on-surface-variant mt-2">
+                  <span>@nexussnips</span>
+                  <span class="flex items-center gap-1 text-secondary">Watch <span class="material-symbols-outlined text-xs">open_in_new</span></span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Reel Card 6 -->
+      <div class="card-3d-wrapper" data-category="series">
+        <div class="float-container float-card-2">
+          <a href="https://www.instagram.com/nexussnips/reel/DS0IkysEhmJ/" target="_blank" rel="noopener noreferrer" class="block card-3d-inner overflow-hidden border border-white/10 bg-surface-container-low shadow-2xl group">
+            <div class="sheen"></div>
+            <div class="relative aspect-[9/16] w-full overflow-hidden">
+              <img src="../reel6.jpg" alt="Reel 6" class="layer-base absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1542204165-65bf26472b9b?w=800&auto=format&fit=crop&q=80';">
+              <div class="layer-overlay absolute inset-0 bg-gradient-to-t from-[#131314] via-[#131314]/30 to-black/30 pointer-events-none"></div>
+
+              <div class="layer-content absolute top-4 inset-x-4 flex justify-between items-center pointer-events-none">
+                <span class="glass-pill px-3 py-1 rounded-full text-[11px] font-semibold text-primary tracking-wider uppercase">WEB SERIES</span>
+                <span class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-white/90">
+                  <span class="material-symbols-outlined text-base">live_tv</span>
+                </span>
+              </div>
+
+              <div class="layer-pop absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                <div class="w-16 h-16 rounded-full bg-primary/90 text-black flex items-center justify-center shadow-[0_0_30px_rgba(255,205,130,0.8)] transform scale-75 group-hover:scale-100 transition-transform">
+                  <span class="material-symbols-outlined text-3xl fill-1">play_arrow</span>
+                </div>
+              </div>
+
+              <div class="layer-content absolute bottom-0 inset-x-0 p-5 pointer-events-none">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="text-[11px] text-primary font-medium tracking-wide uppercase">Episode Climax</span>
+                </div>
+                <h3 class="font-display-lg text-lg text-white font-medium line-clamp-1 group-hover:text-primary transition-colors">The Final Gambit</h3>
+                <div class="flex justify-between items-center text-xs text-on-surface-variant mt-2">
+                  <span>@nexussnips</span>
+                  <span class="flex items-center gap-1 text-primary">Watch <span class="material-symbols-outlined text-xs">open_in_new</span></span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Reel Card 7 -->
+      <div class="card-3d-wrapper" data-category="movies">
+        <div class="float-container float-card-3">
+          <a href="https://www.instagram.com/nexussnips/reel/DRg6kpSEiMs/" target="_blank" rel="noopener noreferrer" class="block card-3d-inner overflow-hidden border border-white/10 bg-surface-container-low shadow-2xl group">
+            <div class="sheen"></div>
+            <div class="relative aspect-[9/16] w-full overflow-hidden">
+              <img src="../reel7.jpg" alt="Reel 7" class="layer-base absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=800&auto=format&fit=crop&q=80';">
+              <div class="layer-overlay absolute inset-0 bg-gradient-to-t from-[#131314] via-[#131314]/30 to-black/30 pointer-events-none"></div>
+
+              <div class="layer-content absolute top-4 inset-x-4 flex justify-between items-center pointer-events-none">
+                <span class="glass-pill px-3 py-1 rounded-full text-[11px] font-semibold text-primary tracking-wider uppercase">MOVIES</span>
+                <span class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-white/90">
+                  <span class="material-symbols-outlined text-base">theaters</span>
+                </span>
+              </div>
+
+              <div class="layer-pop absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                <div class="w-16 h-16 rounded-full bg-primary/90 text-black flex items-center justify-center shadow-[0_0_30px_rgba(255,205,130,0.8)] transform scale-75 group-hover:scale-100 transition-transform">
+                  <span class="material-symbols-outlined text-3xl fill-1">play_arrow</span>
+                </div>
+              </div>
+
+              <div class="layer-content absolute bottom-0 inset-x-0 p-5 pointer-events-none">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="text-[11px] text-primary font-medium tracking-wide uppercase">Noir Tone</span>
+                </div>
+                <h3 class="font-display-lg text-lg text-white font-medium line-clamp-1 group-hover:text-primary transition-colors">Silhouettes of Neon</h3>
+                <div class="flex justify-between items-center text-xs text-on-surface-variant mt-2">
+                  <span>@nexussnips</span>
+                  <span class="flex items-center gap-1 text-primary">Watch <span class="material-symbols-outlined text-xs">open_in_new</span></span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Reel Card 8 -->
+      <div class="card-3d-wrapper" data-category="trending">
+        <div class="float-container float-card-4">
+          <a href="https://www.instagram.com/nexussnips/reel/DdJeKIUBv1o/" target="_blank" rel="noopener noreferrer" class="block card-3d-inner overflow-hidden border border-white/10 bg-surface-container-low shadow-2xl group">
+            <div class="sheen"></div>
+            <div class="relative aspect-[9/16] w-full overflow-hidden">
+              <img src="../reel8.jpg" alt="Reel 8" class="layer-base absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=800&auto=format&fit=crop&q=80';">
+              <div class="layer-overlay absolute inset-0 bg-gradient-to-t from-[#131314] via-[#131314]/30 to-black/30 pointer-events-none"></div>
+
+              <div class="layer-content absolute top-4 inset-x-4 flex justify-between items-center pointer-events-none">
+                <span class="glass-pill px-3 py-1 rounded-full text-[11px] font-semibold text-secondary tracking-wider uppercase">TRENDING</span>
+                <span class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-secondary">
+                  <span class="material-symbols-outlined text-base">auto_awesome</span>
+                </span>
+              </div>
+
+              <div class="layer-pop absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                <div class="w-16 h-16 rounded-full bg-secondary/90 text-black flex items-center justify-center shadow-[0_0_30px_rgba(216,185,255,0.8)] transform scale-75 group-hover:scale-100 transition-transform">
+                  <span class="material-symbols-outlined text-3xl fill-1">play_arrow</span>
+                </div>
+              </div>
+
+              <div class="layer-content absolute bottom-0 inset-x-0 p-5 pointer-events-none">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="text-[11px] text-secondary font-medium tracking-wide uppercase">Visual FX</span>
+                </div>
+                <h3 class="font-display-lg text-lg text-white font-medium line-clamp-1 group-hover:text-secondary transition-colors">Infinite Dimensions</h3>
+                <div class="flex justify-between items-center text-xs text-on-surface-variant mt-2">
+                  <span>@nexussnips</span>
+                  <span class="flex items-center gap-1 text-secondary">Watch <span class="material-symbols-outlined text-xs">open_in_new</span></span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Reel Card 9 -->
+      <div class="card-3d-wrapper" data-category="movies">
+        <div class="float-container float-card-2">
+          <a href="https://www.instagram.com/nexussnips/reel/Dbf5XoqErKX/" target="_blank" rel="noopener noreferrer" class="block card-3d-inner overflow-hidden border border-white/10 bg-surface-container-low shadow-2xl group">
+            <div class="sheen"></div>
+            <div class="relative aspect-[9/16] w-full overflow-hidden">
+              <img src="../reel9.jpg" alt="Reel 9" class="layer-base absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&auto=format&fit=crop&q=80';">
+              <div class="layer-overlay absolute inset-0 bg-gradient-to-t from-[#131314] via-[#131314]/30 to-black/30 pointer-events-none"></div>
+
+              <div class="layer-content absolute top-4 inset-x-4 flex justify-between items-center pointer-events-none">
+                <span class="glass-pill px-3 py-1 rounded-full text-[11px] font-semibold text-primary tracking-wider uppercase">MOVIES</span>
+                <span class="w-8 h-8 rounded-full glass-pill flex items-center justify-center text-white/90">
+                  <span class="material-symbols-outlined text-base">camera_outdoor</span>
+                </span>
+              </div>
+
+              <div class="layer-pop absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none">
+                <div class="w-16 h-16 rounded-full bg-primary/90 text-black flex items-center justify-center shadow-[0_0_30px_rgba(255,205,130,0.8)] transform scale-75 group-hover:scale-100 transition-transform">
+                  <span class="material-symbols-outlined text-3xl fill-1">play_arrow</span>
+                </div>
+              </div>
+
+              <div class="layer-content absolute bottom-0 inset-x-0 p-5 pointer-events-none">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="text-[11px] text-primary font-medium tracking-wide uppercase">Director's Cut</span>
+                </div>
+                <h3 class="font-display-lg text-lg text-white font-medium line-clamp-1 group-hover:text-primary transition-colors">Symphony of Darkness</h3>
+                <div class="flex justify-between items-center text-xs text-on-surface-variant mt-2">
+                  <span>@nexussnips</span>
+                  <span class="flex items-center gap-1 text-primary">Watch <span class="material-symbols-outlined text-xs">open_in_new</span></span>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Load More Button with 3D pulse -->
+    <div class="mt-16 flex justify-center">
+      <button id="loadMoreBtn" class="glass-panel px-8 py-3.5 rounded-full text-on-surface font-label-md text-xs tracking-widest uppercase hover:bg-white/10 hover:text-primary hover:border-primary transition-all duration-300 border border-white/15 flex items-center gap-2.5 shadow-xl hover:shadow-[0_0_25px_rgba(255,205,130,0.25)] group">
+        <span class="material-symbols-outlined text-lg group-hover:rotate-180 transition-transform duration-500 text-primary">autorenew</span>
+        <span>LOAD MORE REELS</span>
+      </button>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="w-full bg-surface border-t border-white/5 flex flex-col md:flex-row justify-between items-center px-margin-mobile md:px-margin-desktop py-8 gap-6 mt-20 relative z-10">
+    <div class="font-display-lg text-2xl text-primary tracking-tight">
+      NEXUSSNIPS
+    </div>
+    
+    <div class="flex gap-8 font-body-md text-xs tracking-wider uppercase">
+      <a href="https://www.instagram.com/nexussnips/" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-primary transition-colors duration-300">
+        INSTAGRAM
+      </a>
+      <a href="https://www.youtube.com/@amberpahwa_27" target="_blank" rel="noopener noreferrer" class="text-on-surface-variant hover:text-primary transition-colors duration-300">
+        YOUTUBE
+      </a>
+    </div>
+
+    <div class="text-on-surface-variant/60 font-label-sm text-xs">
+      © 2026 NEXUSSNIPS. ALL RIGHTS RESERVED.
+    </div>
+  </footer>
+
+  <!-- 3D Physics, Gyro Tilt & Carousel Engine Script -->
+  <script>
+    /* 1. Mobile Menu Toggle */
+    const mobileMenuButton = document.getElementById('mobileMenuButton');
+    const mobileMenu = document.getElementById('mobileMenu');
+    mobileMenuButton.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      mobileMenu.classList.toggle('flex');
+    });
+
+    /* 2. 3D Card Gyro Tilt & Dynamic Sheen Follower */
+    const cards = document.querySelectorAll('.card-3d-wrapper');
+
+    cards.forEach(card => {
+      const inner = card.querySelector('.card-3d-inner');
+      const sheen = card.querySelector('.sheen');
+
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((centerY - y) / centerY) * 14;
+        const rotateY = ((x - centerX) / centerX) * 14;
+
+        inner.style.transform = `rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) scale3d(1.04, 1.04, 1.04)`;
+
+        if (sheen) {
+          const sheenX = (x / rect.width) * 100;
+          const sheenY = (y / rect.height) * 100;
+          sheen.style.background = `radial-gradient(circle at ${sheenX}% ${sheenY}%, rgba(255, 255, 255, 0.28) 0%, transparent 65%)`;
+        }
+      });
+
+      card.addEventListener('mouseleave', () => {
+        inner.style.transform = `rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+      });
+    });
+
+    /* 3. Category Filter Logic */
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('active', 'border-secondary', 'text-secondary', 'bg-secondary/15');
+          b.classList.add('border-white/10', 'text-on-surface-variant');
+        });
+
+        btn.classList.add('active', 'border-secondary', 'text-secondary', 'bg-secondary/15');
+        btn.classList.remove('border-white/10', 'text-on-surface-variant');
+
+        const filter = btn.getAttribute('data-filter');
+        cards.forEach(card => {
+          const category = card.getAttribute('data-category');
+          if (filter === 'all' || category === filter) {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        initFlowStream(filter);
+      });
+    });
+
+    /* 4. View Mode Switcher (Grid vs 3D Flow Stream) */
+    const viewGridBtn = document.getElementById('viewGridBtn');
+    const viewFlowBtn = document.getElementById('viewFlowBtn');
+    const gridView = document.getElementById('floatingGridView');
+    const flowView = document.getElementById('flowCarouselView');
+
+    viewGridBtn.addEventListener('click', () => {
+      viewGridBtn.classList.add('bg-primary', 'text-on-primary', 'font-bold', 'shadow-md');
+      viewGridBtn.classList.remove('text-on-surface-variant');
+      viewFlowBtn.classList.remove('bg-primary', 'text-on-primary', 'font-bold', 'shadow-md');
+      viewFlowBtn.classList.add('text-on-surface-variant');
+
+      gridView.classList.remove('hidden');
+      flowView.classList.add('hidden');
+    });
+
+    viewFlowBtn.addEventListener('click', () => {
+      viewFlowBtn.classList.add('bg-primary', 'text-on-primary', 'font-bold', 'shadow-md');
+      viewFlowBtn.classList.remove('text-on-surface-variant');
+      viewGridBtn.classList.remove('bg-primary', 'text-on-primary', 'font-bold', 'shadow-md');
+      viewGridBtn.classList.add('text-on-surface-variant');
+
+      flowView.classList.remove('hidden');
+      gridView.classList.add('hidden');
+
+      initFlowStream('all');
+    });
+
+    /* 5. 3D Flow Stream Carousel Engine (CoverFlow Physics) */
+    const reelsData = [
+      { id: 1, title: "The Awakening Scene", tag: "MOVIES", link: "https://www.instagram.com/nexussnips/reel/Db0f0pHEoAS/", img: "../reel1.jpg", fallback: "https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=800&auto=format&fit=crop&q=80", category: "movies" },
+      { id: 2, title: "Midnight Velocity", tag: "TRENDING", link: "https://www.instagram.com/nexussnips/reel/Dbie8_uElHD/", img: "../reel2.jpg", fallback: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=800&auto=format&fit=crop&q=80", category: "trending" },
+      { id: 3, title: "Shadows of Arcadia", tag: "WEB SERIES", link: "https://www.instagram.com/nexussnips/reel/Da0MVNWS1sZ/", img: "../reel3.jpg", fallback: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=800&auto=format&fit=crop&q=80", category: "series" },
+      { id: 4, title: "Echoes in the Rain", tag: "MOVIES", link: "https://www.instagram.com/nexussnips/reel/DUTcYY8kj6h/", img: "../reel4.jpg", fallback: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?w=800&auto=format&fit=crop&q=80", category: "movies" },
+      { id: 5, title: "Cyberpunk Horizon", tag: "TRENDING", link: "https://www.instagram.com/nexussnips/reel/DbdUy2BEprH/", img: "../reel5.jpg", fallback: "https://images.unsplash.com/photo-1509281373149-e957c6296406?w=800&auto=format&fit=crop&q=80", category: "trending" },
+      { id: 6, title: "The Final Gambit", tag: "WEB SERIES", link: "https://www.instagram.com/nexussnips/reel/DS0IkysEhmJ/", img: "../reel6.jpg", fallback: "https://images.unsplash.com/photo-1542204165-65bf26472b9b?w=800&auto=format&fit=crop&q=80", category: "series" },
+      { id: 7, title: "Silhouettes of Neon", tag: "MOVIES", link: "https://www.instagram.com/nexussnips/reel/DRg6kpSEiMs/", img: "../reel7.jpg", fallback: "https://images.unsplash.com/photo-1514306191717-452ec28c7814?w=800&auto=format&fit=crop&q=80", category: "movies" },
+      { id: 8, title: "Infinite Dimensions", tag: "TRENDING", link: "https://www.instagram.com/nexussnips/reel/DdJeKIUBv1o/", img: "../reel8.jpg", fallback: "https://images.unsplash.com/photo-1478760329108-5c3ed9d495a0?w=800&auto=format&fit=crop&q=80", category: "trending" },
+      { id: 9, title: "Symphony of Darkness", tag: "MOVIES", link: "https://www.instagram.com/nexussnips/reel/Dbf5XoqErKX/", img: "../reel9.jpg", fallback: "https://images.unsplash.com/photo-1534447677768-be436bb09401?w=800&auto=format&fit=crop&q=80", category: "movies" }
+    ];
+
+    let currentFlowIndex = 2;
+    let filteredFlowData = [...reelsData];
+    const flowTrack = document.getElementById('flowTrack');
+
+    function initFlowStream(category = 'all') {
+      filteredFlowData = category === 'all' 
+        ? [...reelsData] 
+        : reelsData.filter(item => item.category === category);
+      
+      if (filteredFlowData.length === 0) filteredFlowData = [...reelsData];
+      currentFlowIndex = Math.min(currentFlowIndex, filteredFlowData.length - 1);
+      renderFlowItems();
+      updateFlowPositions();
+    }
+
+    function renderFlowItems() {
+      flowTrack.innerHTML = '';
+      filteredFlowData.forEach((item, index) => {
+        const el = document.createElement('div');
+        el.className = 'flow-item overflow-hidden glass-panel border border-white/10 shadow-2xl group';
+        el.innerHTML = `
+          <div class="relative w-full h-full">
+            <img src="${item.img}" alt="${item.title}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" onerror="this.onerror=null; this.src='${item.fallback}';">
+            <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/30"></div>
+            
+            <div class="absolute top-4 inset-x-4 flex justify-between items-center">
+              <span class="glass-pill px-3 py-1 rounded-full text-[10px] font-semibold text-primary uppercase">${item.tag}</span>
+            </div>
+
+            <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-20">
+              <div class="w-16 h-16 rounded-full bg-primary text-black flex items-center justify-center shadow-[0_0_35px_rgba(255,205,130,0.9)] transform hover:scale-110 transition-transform">
+                <span class="material-symbols-outlined text-3xl">play_arrow</span>
+              </div>
+            </a>
+
+            <div class="absolute bottom-0 inset-x-0 p-5 z-10">
+              <h3 class="font-display-lg text-lg text-white font-medium mb-1">${item.title}</h3>
+              <a href="${item.link}" target="_blank" class="inline-flex items-center gap-1.5 text-xs text-primary hover:underline">
+                Watch on Instagram <span class="material-symbols-outlined text-xs">open_in_new</span>
+              </a>
+            </div>
+          </div>
+        `;
+
+        el.addEventListener('click', () => {
+          if (index !== currentFlowIndex) {
+            currentFlowIndex = index;
+            updateFlowPositions();
+          }
+        });
+
+        flowTrack.appendChild(el);
+      });
+    }
+
+    function updateFlowPositions() {
+      const items = flowTrack.querySelectorAll('.flow-item');
+      items.forEach((item, index) => {
+        const offset = index - currentFlowIndex;
+        const absOffset = Math.abs(offset);
+
+        if (absOffset > 3) {
+          item.style.opacity = '0';
+          item.style.pointerEvents = 'none';
+          item.style.transform = `translateX(${offset * 180}px) translateZ(-400px) rotateY(${offset * -35}deg)`;
+        } else {
+          item.style.opacity = absOffset === 0 ? '1' : `${1 - absOffset * 0.28}`;
+          item.style.pointerEvents = 'auto';
+          item.style.zIndex = `${10 - absOffset}`;
+
+          const translateX = offset * 210;
+          const translateZ = -absOffset * 150;
+          const rotateY = offset * -28;
+          const scale = absOffset === 0 ? 1.05 : 0.9;
+
+          item.style.transform = `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+          
+          if (absOffset === 0) {
+            item.style.boxShadow = '0 30px 60px -10px rgba(0,0,0,0.8), 0 0 40px rgba(255,205,130,0.3)';
+            item.style.filter = 'brightness(1.05)';
+          } else {
+            item.style.boxShadow = '0 15px 30px rgba(0,0,0,0.6)';
+            item.style.filter = `brightness(0.7) blur(${absOffset * 1}px)`;
+          }
+        }
+      });
+    }
+
+    document.getElementById('flowPrevBtn').addEventListener('click', () => {
+      if (currentFlowIndex > 0) {
+        currentFlowIndex--;
+        updateFlowPositions();
+      }
+    });
+
+    document.getElementById('flowNextBtn').addEventListener('click', () => {
+      if (currentFlowIndex < filteredFlowData.length - 1) {
+        currentFlowIndex++;
+        updateFlowPositions();
+      }
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (!flowView.classList.contains('hidden')) {
+        if (e.key === 'ArrowLeft' && currentFlowIndex > 0) {
+          currentFlowIndex--;
+          updateFlowPositions();
+        } else if (e.key === 'ArrowRight' && currentFlowIndex < filteredFlowData.length - 1) {
+          currentFlowIndex++;
+          updateFlowPositions();
+        }
+      }
+    });
+
+    /* Touch & Drag Support for 3D Flow Carousel */
+    let startX = 0;
+    let isDragging = false;
+    const flowContainer = document.getElementById('flowContainer');
+
+    flowContainer.addEventListener('mousedown', (e) => {
+      startX = e.clientX;
+      isDragging = true;
+    });
+
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+    });
+
+    flowContainer.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const deltaX = e.clientX - startX;
+      if (deltaX > 60 && currentFlowIndex > 0) {
+        currentFlowIndex--;
+        updateFlowPositions();
+        isDragging = false;
+      } else if (deltaX < -60 && currentFlowIndex < filteredFlowData.length - 1) {
+        currentFlowIndex++;
+        updateFlowPositions();
+        isDragging = false;
+      }
+    });
+
+    flowContainer.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    flowContainer.addEventListener('touchend', (e) => {
+      const deltaX = e.changedTouches[0].clientX - startX;
+      if (deltaX > 40 && currentFlowIndex > 0) {
+        currentFlowIndex--;
+        updateFlowPositions();
+      } else if (deltaX < -40 && currentFlowIndex < filteredFlowData.length - 1) {
+        currentFlowIndex++;
+        updateFlowPositions();
+      }
+    }, { passive: true });
+
+    /* 6. Load More Interactive Feedback */
+    const loadMoreBtn = document.getElementById('loadMoreBtn');
+    loadMoreBtn.addEventListener('click', () => {
+      loadMoreBtn.innerHTML = '<span class="material-symbols-outlined animate-spin text-lg text-primary">progress_activity</span> LOADING...';
+      setTimeout(() => {
+        loadMoreBtn.innerHTML = '<span class="material-symbols-outlined text-lg text-primary">check_circle</span> ALL REELS LOADED';
+        loadMoreBtn.classList.add('opacity-75', 'pointer-events-none');
+      }, 900);
+    });
+  </script>
+</body>
+</html>
